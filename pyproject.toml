@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plex_api_tester"
+description = "A tool to test the Plex API"
+authors = [{name = "USERNAME", email = "USERNAME@example.com"}]
+license = {text = "MIT"}
+version = "0.1.0"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "plex-api-client",
+    "plexapi",
+    "requests",
+    "click",
+    "colorlog",
+
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "tox",
+    "build",
+    "pytest",
+    "coverage"
+]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.scripts]
+cmd = "plex_api_tester.main:main"
+test1 = "plex_api_tester.test:test1"
+test2 = "plex_api_tester.test:test2"
+test3 = "plex_api_tester.test:test3"
+test4 = "plex_api_tester.test:test4"
+test5 = "plex_api_tester.test:test5"
+test6 = "plex_api_tester.test:test6"
+test7 = "plex_api_tester.test:test7"
+test8 = "plex_api_tester.test:test8"
+
+[project.urls]
+homepage = "https://example.com"
+
+[tool.setuptools]
+include-package-data = true
+platforms = ["any"]
+license-files = ["LICENSE"]
+
+[tool.setuptools.packages.find]
+exclude = ["tests"]
+namespaces = true
+where = ["src"]
