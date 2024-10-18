@@ -1,16 +1,24 @@
 import logging
+import time
 from pprint import pprint
 
 from . import utils
-from .plex_data import get_playlist_items, get_playlist_key
+from .plex.server import get_server
+from .plex_api_data import delete_playlist, get_playlist_ratingKey, get_playlists
 
+plex_server = get_server()
 logger = utils.create_logger(level=logging.INFO)
-
-URL = "http://192.168.1.42:32400"
 
 
 def main():
-    title = "test_video_playlist_1"
-    key, playlist_type = get_playlist_key(title)
-    playlist_data = get_playlist_items(key, playlist_type)
-    pprint(playlist_data)
+    title = "test_audio_playlist_3"
+
+    start_time = time.time()
+    playlist_key = get_playlist_ratingKey(title)
+    print(f"Playlist ratingKey: {playlist_key}")
+    delete_playlist(playlist_key)
+    pprint(get_playlists())
+    end_time = time.time()
+    plex_api_duration = end_time - start_time
+
+    print(f"Plex API call duration: {plex_api_duration:.4f} seconds")
