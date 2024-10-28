@@ -79,7 +79,7 @@ class PlexAuthentication:
 
         except requests.RequestException as e:
             logger.error(f"Failed to fetch Plex token: {e}")
-            raise AuthenticationError(f"Authentication failed: {e}")
+            raise AuthenticationError("Authentication failed") from e
 
     def verify_authentication(self, username: str, password: str) -> None:
         """
