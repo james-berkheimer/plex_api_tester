@@ -7,22 +7,12 @@ from pprint import pprint
 import requests
 
 from . import utils
-
-# from .plex_api_client import (
-#     get_playlist_items,
-#     get_playlist_ratingKey,
-#     get_playlists,
-#     remove_playlist_items,
-# )
-from .plex.api_client import (
-    get_playlist_items,
-    get_playlist_ratingKey,
-    get_playlists,
-    remove_playlist_items,
-)
+from .plex.api_client import PlexAPIClient
 from .plex.authentication import PlexAuthentication
 
 logger = utils.create_logger(level=logging.INFO)
+
+client = PlexAPIClient()
 
 
 def test1():
@@ -55,13 +45,13 @@ def test1():
 
 
 def test2():
-    playlists = get_playlists()
+    playlists = client.get_playlists()
     pprint(playlists)
 
 
 def plex_api_call(title):
-    rating_key = get_playlist_ratingKey(title)
-    playlist_data = get_playlist_items(rating_key)
+    rating_key = client.get_playlist_ratingKey(title)
+    playlist_data = client.get_playlist_items(rating_key)
     return playlist_data
 
 
@@ -72,7 +62,7 @@ def test3():
     # session = requests.Session()
     playlist_ratingKey = "367250"
     playlistItemIDs = ["44097"]
-    remove_playlist_items(playlist_ratingKey, playlistItemIDs)
+    client.remove_playlist_items(playlist_ratingKey, playlistItemIDs)
 
     # endpoint = f"/playlists/367250/items/{playlistItemID}"
     # item_key = f"{base_url}{endpoint}"
@@ -182,11 +172,11 @@ def authenticate_plex(username, password):
     import uuid
 
     url = "https://plex.tv/users/sign_in.json"
-    headers1 = {"Content-Type": "application/x-www-form-urlencoded", "User-Agent": "PlexClient/1.0"}
-    headers2 = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
-    }
+    # headers1 = {"Content-Type": "application/x-www-form-urlencoded", "User-Agent": "PlexClient/1.0"}
+    # headers2 = {
+    #     "Content-Type": "application/x-www-form-urlencoded",
+    #     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+    # }
 
     # Generate a unique client identifier (UUID)
     client_identifier = str(uuid.uuid4())

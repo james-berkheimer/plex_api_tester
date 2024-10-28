@@ -3,14 +3,11 @@ import time
 from pprint import pprint
 
 from . import utils
-from .plex.api_client import (
-    get_playlist_items,
-    get_playlist_ratingKey,
-    get_playlists,
-    parse_playlist_data,
-)
+from .plex.api_client import PlexAPIClient
 
 logger = utils.create_logger(level=logging.INFO)
+
+client = PlexAPIClient()
 
 
 def main():
@@ -28,10 +25,10 @@ def main():
 
 def call_api(title):
     start_time = time.time()
-    playlist_key = get_playlist_ratingKey(title)
+    playlist_key = client.get_playlist_ratingKey(title)
     print(f"Playlist ratingKey: {playlist_key}")
-    playlist_data = get_playlist_items(playlist_key)
-    sorted_data = parse_playlist_data(playlist_data)
+    playlist_data = client.get_playlist_items(playlist_key)
+    sorted_data = client.parse_playlist_data(playlist_data)
     pprint(sorted_data)
 
     end_time = time.time()

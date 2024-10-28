@@ -1,6 +1,5 @@
 import json
 import logging
-from pprint import pprint
 
 # from .config import PlexConfig
 from .plex import PlexAuthentication
