@@ -7,8 +7,20 @@ from pprint import pprint
 import requests
 
 from . import utils
+
+# from .plex_api_client import (
+#     get_playlist_items,
+#     get_playlist_ratingKey,
+#     get_playlists,
+#     remove_playlist_items,
+# )
+from .plex.api_client import (
+    get_playlist_items,
+    get_playlist_ratingKey,
+    get_playlists,
+    remove_playlist_items,
+)
 from .plex.authentication import PlexAuthentication
-from .plex_api_client import get_playlist_items, get_playlist_ratingKey, remove_playlist_items
 
 logger = utils.create_logger(level=logging.INFO)
 
@@ -43,25 +55,8 @@ def test1():
 
 
 def test2():
-    # title = "test_audio_playlist_1"
-    title = "test_audio_playlist_3"
-    # title = "Car songs"
-    # Timing the Plex API call
-    start_time = time.time()
-    _plex_api_data = plex_api_call(title)
-    end_time = time.time()
-    plex_api_duration = end_time - start_time
-    pprint(_plex_api_data)
-
-    # Timing the Plex Python API call
-    # start_time = time.time()
-    # _plex_python_api_call_data = plex_python_api_call(title)
-    # end_time = time.time()
-    # plex_python_api_duration = end_time - start_time
-    # pprint(plex_python_api_call_data)
-
-    print(f"Plex API call duration: {plex_api_duration:.4f} seconds")
-    # print(f"Plex Python API call duration: {plex_python_api_duration:.4f} seconds")
+    playlists = get_playlists()
+    pprint(playlists)
 
 
 def plex_api_call(title):

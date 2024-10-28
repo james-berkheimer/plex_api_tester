@@ -368,3 +368,29 @@ def parse_playlist_data(
             logger.error(f"Error processing item: {item}, error: {e}")
 
     return sorted_data
+
+
+def remove_playlist_items(playlist_ratingKey: str, playlistItemIDs: List[str]) -> bool:
+    """
+    Remove items from a playlist in Plex.
+
+    :param playlist_ratingKey: The key (or ratingKey) of the playlist.
+    :param playlistItemIDs: A list of playlistItemIDs to remove from the playlist.
+    :return: True if the items were successfully removed, False otherwise.
+    """
+    client = PlexAPIClient()
+
+    for playlistItemID in playlistItemIDs:
+        endpoint = f"/playlists/{playlist_ratingKey}/items/{playlistItemID}"
+        response = client._delete(endpoint)
+
+        if response is not None and response.status_code in [200, 204]:
+            logger.info(f"Item removed from playlist with key '{playlist_ratingKey}' successfully.")
+        else:
+            if response is None:
+                logger.error("Failed to remove item from playlist. No response received.")
+            else:
+                logger.error(f"Failed to remove item from playlist. Status code: {response.status_code}")
+            return False
+
+    return True

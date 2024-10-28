@@ -6,6 +6,7 @@ from . import utils
 from .plex.api_client import (
     get_playlist_items,
     get_playlist_ratingKey,
+    get_playlists,
     parse_playlist_data,
 )
 
