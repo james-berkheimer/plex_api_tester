@@ -19,9 +19,7 @@ dependencies = [
     "plexapi",
     "requests",
     "click",
-    "colorlog",
-    "platform"
-
+    "colorlog"
 ]
 
 [project.optional-dependencies]
