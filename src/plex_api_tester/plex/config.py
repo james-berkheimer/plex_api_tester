@@ -33,7 +33,7 @@ class PlexConfig:
         self.X_PLEX_IDENTIFIER = hex(getnode())
         self.X_PLEX_PLATFORM = None
         self.X_PLEX_PLATFORM_VERSION = None
-        self.X_PLEX_PRODUCT = "PlexAPI"
+        self.X_PLEX_PRODUCT = "PlexClientAPI"
         self.X_PLEX_VERSION = None
         self.X_PLEX_DEVICE = None
         self.X_PLEX_DEVICE_NAME = None

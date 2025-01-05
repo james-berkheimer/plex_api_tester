@@ -100,7 +100,7 @@ class PlexAuthentication:
             logger.info("No valid token found; attempting to authenticate with Plex")
             token = self.fetch_plex_token(username, password)
             self.config_instance.token = token
-            self.store_token(token)
+            # self.store_token(token) # Uncomment to store the token for future sessions
             logger.info("Authentication successful; token stored.")
         except AuthenticationError as e:
             logger.error(f"Authentication failed: {e}")

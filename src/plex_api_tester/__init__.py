@@ -1,5 +1,6 @@
 import json
 import logging
+import os
 
 # from .config import PlexConfig
 from .plex import PlexAuthentication
@@ -15,7 +16,12 @@ try:
         data = json.load(f)
         plex_credentials = data.get("plex", {})
         username = plex_credentials.get("username", "")
+        email = plex_credentials.get("email", "")
         password = plex_credentials.get("password", "")
+        os.environ["PLEX_USERNAME"] = username
+        os.environ["PLEX_EMAIL"] = email
+        os.environ["PLEX_PASSWORD"] = password
+
         server_ip = plex_credentials.get("server_ip", "")
         server_port = plex_credentials.get("server_port", "")
         plex_config.set_baseurl(server_ip, server_port)
